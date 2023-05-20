@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from mod_python import apache, Session
+import fonctions
+
+def index(req):
+    session = Session.Session(req)
+    fonctions.redirectionSiNonconnecte(req,session)
+    menu_html = '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Menu</title>
+    </head>
+    <body>
+      <h1>Menu</h1>
+      <p>{}</p>
+      <ul>
+        <li><a href="form-ajout.py">Ajout d'un contact</a></li>
+        <li><a href="liste.py">Liste des contacts</a></li>
+        <li><a href="deconnexion.py">Déconnexion</a></li>
+        <!-- Ajoutez ici d'autres liens -->
+      </ul>
+    </body>
+    </html>
+    '''.format(session['login'])
+               
+    req.content_type = 'text/html'
+
+    # Renvoyer le contenu généré en tant que réponse
+    return menu_html
