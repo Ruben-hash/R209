@@ -1,32 +1,38 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
+#!/usr/bin/python
 
-def liste(
+import fonctions
+from mod_python import Session, apache
+
 def index(req):
-    # Créer le contenu HTML du formulaire
-    form_html = '''
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>liste</title>
-    </head>
-    <body>
-      <h1>Mon Formulaire</h1>
+    s = Session.Session(req)
+
+    req.content_type = "text/html"
+
+    html = fonctions.codeHTML("Liste des Contact","""<form method="get">
+    <p><b>Liste des contacts</b></p>
+    <span>Rechercher un nom: </span><input type="text" name="login" onkeyup=liste() id="text"/>
+    <div id='div'></div>
+    <a href="menu.py">Retour au menu</a>
+    </form>
     
-      <form action="/submit" method="post">
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" required><br><br>
-
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required><br><br>
-
-        <label for="message">Message :</label>
+    <script>
+    function liste(){
+        req = new XMLHttpRequest(); 
+        var text = document.getElementById("text").value;
+        console.log(text)
         
-        <button type="submit">Envoyer</button>
-      </form>
-    </body>
-    </html>
-    '''
+        req.open('GET', 'affiche-liste.py?nom='+text, false);
+        req.send();
+        if (req.readyState == 4 && req.status == 200) {
+            var div = document.getElementById("div");
+            console.log("Request: "+req.responseText);
+            div.innerHTML = req.responseText;
+        }
 
-    return form_html
+    }
+    </script>
+    """) 
+    req.write(html)
+
+
 

@@ -13,7 +13,7 @@ def index(req):
     email = req.form['email']
     tel = req.form['tel']
     adresse = req.form['adresse']
-    curseur.execute("INSERT INTO contact (nom, adresse, email, tel, id_util) VALUES (%s, %s, %s, %s, %s);", (nom, adresse, email, tel, session["id_util"]))
+    curseur.execute("INSERT INTO contact (nom, adresse, email, tel, id_util, latitude , longitude) VALUES (%s, %s, %s, %s, %s);", (nom, adresse, email, tel, session["id_util"], latitude, longitude))
 
     
     connexion.commit()

@@ -21,7 +21,7 @@ def generate_form():
         <label for="email">Email :</label>
         <input type="email" id="email" name="email" required><br><br>
 
-        <label for="tel">Téléphone :</label>
+        <label for="tel">telephone :</label>
         <input type="text" id="tel" name="tel"><br><br>
 
         <label for="adresse">Adresse :</label>

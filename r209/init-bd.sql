@@ -20,5 +20,7 @@ CREATE TABLE contact (
   email VARCHAR(100) NOT NULL,
   tel VARCHAR(10),
   adresse VARCHAR(100),
-  id_util INT REFERENCES util(id_util)
+  id_util INT REFERENCES util(id_util),
+  latitude REAL,
+  longitude REAL
 );
